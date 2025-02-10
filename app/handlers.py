@@ -1,8 +1,9 @@
 # app/handlers.py
+
 from telegram import Update
 from telegram.ext import CommandHandler, ContextTypes
 import logging
-from app.shared import get_user_context, db_session
+from app.shared import get_user_context, bot_state_manager  # Импортируем необходимые компоненты
 from config.logging_config import logger
 
 # Настройка логирования
@@ -14,8 +15,11 @@ logging.basicConfig(
 # Команда /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_id = update.effective_user.id
-    get_user_context(user_id)  # Создаем контекст пользователя
     logger.info(f"Команда /start вызвана пользователем {user_id}")
+    
+    # Получаем или создаем контекст пользователя
+    user_context = get_user_context(user_id)
+    
     await update.message.reply_text('Привет! Это торговый бот для биржи MEXC.\n'
                                     'Команды:\n'
                                     '/start - начать\n'

@@ -1,18 +1,17 @@
 # app/main.py
+
 import os
 import sys
 import asyncio
 import logging
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from telegram import Update
-
 # Добавляем корневую директорию проекта в sys.path
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, PROJECT_ROOT)
-
 # Абсолютные импорты
 from config.config import TOKEN, DATABASE_URL, ADMIN_ID
-from app.database import Session  # Импортируем Session
+from app.database import init_db, db_session  # Инициализация базы данных
 from config.logging_config import logger
 
 # Глобальная переменная application
@@ -29,6 +28,10 @@ logging.getLogger("httpx").setLevel(logging.WARNING)  # Скрыть INFO-соо
 def main() -> None:
     global application  # Используем глобальную переменную
     try:
+        # Инициализация базы данных
+        init_db()
+        logger.info("База данных успешно инициализирована.")
+
         logger.info("Бот успешно запущен!")
         application = ApplicationBuilder().token(TOKEN).build()
         
@@ -54,6 +57,7 @@ def main() -> None:
         application.add_handler(CommandHandler("profit_total", profit_total))
 
         application.run_polling()
+    
     except Exception as e:
         error_message = f"Критическая ошибка при запуске бота: {e}"
         logger.error(error_message)
@@ -79,5 +83,8 @@ if __name__ == '__main__':
         logger.error(error_message)
         asyncio.run(send_error_notification(error_message))
     finally:
-        with Session() as session:  # Закрываем сессию через контекстный менеджер
-            logger.info("Завершение работы бота...")
+        # Закрываем сессию базы данных
+        if db_session:
+            db_session.close()
+            logger.info("Сессия базы данных закрыта.")
+        logger.info("Завершение работы бота...")
