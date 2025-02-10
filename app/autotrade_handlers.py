@@ -2,7 +2,7 @@
 from telegram import Update
 from telegram.ext import CommandHandler, ContextTypes
 import logging
-from app.shared import bot_state_manager, get_user_context, UserContext, db_session  # Импортируем UserContext
+from app.shared import bot_state_manager, get_user_context, db_session  # Удаляем UserContext из импортов
 from config.logging_config import logger
 import asyncio
 
@@ -18,8 +18,8 @@ is_running = False
 # Команда /autobuy
 async def autobuy(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_id = update.effective_user.id
-    user_context = get_user_context(user_id)
-
+    user_context = get_user_context(user_id)  # Используем get_user_context вместо UserContext
+    
     if bot_state_manager.is_trading_active():
         await update.message.reply_text('Автоматическая торговля уже запущена. Чтобы остановить, используйте команду /stop.')
         return

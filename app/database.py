@@ -40,9 +40,9 @@ def init_db():
     Base.metadata.create_all(engine)
     return sessionmaker(bind=engine)
 
-# Глобальный менеджер сессий
-Session = init_db()  # Создаем глобальный sessionmaker
-db_session = Session()  # Создаем глобальную сессию
+# Глобальный sessionmaker
+Session = init_db()  # Создаем sessionmaker
+db_session = Session  # Добавляем глобальную переменную db_session
 
 # Шифрование/дешифрование данных
 class EncryptionManager:

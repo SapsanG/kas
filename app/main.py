@@ -1,12 +1,18 @@
 # app/main.py
 import os
+import sys
 import asyncio
 import logging
-from telegram.ext import ApplicationBuilder, CommandHandler
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram import Update
+
+# Добавляем корневую директорию проекта в sys.path
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, PROJECT_ROOT)
 
 # Абсолютные импорты
 from config.config import TOKEN, DATABASE_URL, ADMIN_ID
-from app.database import db_session
+from app.database import Session  # Импортируем Session
 from config.logging_config import logger
 
 # Глобальная переменная application
@@ -28,13 +34,14 @@ def main() -> None:
         
         # Добавляем обработчики команд
         from app.handlers import start
-        from app.buy_handlers import buy  # Убедись, что здесь есть buy
+        from app.buy_handlers import buy, balance
         from app.profit_handlers import profit_today, profit_history, profit_month, profit_total
         from app.settings_handlers import set_params, set_api_keys, check_api_keys, stats
         from app.autotrade_handlers import autobuy, stop
 
         application.add_handler(CommandHandler("start", start))
-        application.add_handler(CommandHandler("buy", buy))  # Добавляем buy
+        application.add_handler(CommandHandler("buy", buy))
+        application.add_handler(CommandHandler("balance", balance))
         application.add_handler(CommandHandler("set_params", set_params))
         application.add_handler(CommandHandler("autobuy", autobuy))
         application.add_handler(CommandHandler("stop", stop))
@@ -45,7 +52,7 @@ def main() -> None:
         application.add_handler(CommandHandler("profit_history", profit_history))
         application.add_handler(CommandHandler("profit_month", profit_month))
         application.add_handler(CommandHandler("profit_total", profit_total))
-        
+
         application.run_polling()
     except Exception as e:
         error_message = f"Критическая ошибка при запуске бота: {e}"
@@ -72,5 +79,5 @@ if __name__ == '__main__':
         logger.error(error_message)
         asyncio.run(send_error_notification(error_message))
     finally:
-        db_session.close()  # Закрываем сессию
-        logger.info("Завершение работы бота...")
+        with Session() as session:  # Закрываем сессию через контекстный менеджер
+            logger.info("Завершение работы бота...")

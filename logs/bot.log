@@ -1475,3 +1475,39 @@ Traceback (most recent call last):
   File "C:\Users\Глеб\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\request\_baserequest.py", line 385, in _request_wrapper
     raise Conflict(message)
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-02-06 21:23:23,852 - root - INFO - Бот успешно запущен!
+2025-02-06 21:23:25,705 - telegram.ext.Application - INFO - Application started
+2025-02-06 21:23:44,448 - root - INFO - Команда /start вызвана пользователем 810668767
+2025-02-06 21:27:51,383 - root - INFO - Выполнена покупка для пользователя 810668767: {'id': 'C02__516252700996890624040', 'clientOrderId': None, 'timestamp': 1738866471295, 'datetime': '2025-02-06T18:27:51.295Z', 'lastTradeTimestamp': None, 'status': None, 'symbol': 'KAS/USDT', 'type': 'market', 'timeInForce': 'IOC', 'side': 'buy', 'price': 0.089216, 'triggerPrice': None, 'average': None, 'amount': 15.0, 'cost': None, 'filled': None, 'remaining': None, 'fee': None, 'trades': [], 'info': {'symbol': 'KASUSDT', 'orderId': 'C02__516252700996890624040', 'orderListId': '-1', 'price': '0.089216', 'origQty': '15', 'type': 'MARKET', 'side': 'BUY', 'transactTime': '1738866471295'}, 'fees': [], 'lastUpdateTimestamp': None, 'postOnly': None, 'reduceOnly': None, 'stopPrice': None, 'takeProfitPrice': None, 'stopLossPrice': None}
+2025-02-06 21:33:19,359 - telegram.ext.Application - INFO - Application is stopping. This might take a moment.
+2025-02-06 21:33:19,360 - telegram.ext.Application - INFO - Application.stop() complete
+2025-02-06 21:33:19,361 - root - INFO - Завершение работы бота...
+2025-02-06 21:34:34,754 - root - INFO - Бот успешно запущен!
+2025-02-06 21:34:36,044 - root - ERROR - Критическая ошибка при запуске бота: cannot import name 'buy' from 'app.buy_handlers' (C:\Users\Глеб\Desktop\kas\app\buy_handlers.py)
+2025-02-06 21:34:36,374 - root - INFO - Завершение работы бота...
+2025-02-06 21:41:54,347 - root - INFO - Бот успешно запущен!
+2025-02-06 21:41:55,941 - telegram.ext.Application - INFO - Application started
+2025-02-06 21:41:56,196 - root - INFO - Команда /start вызвана пользователем 810668767
+2025-02-06 22:41:46,030 - root - ERROR - Неизвестная ошибка: 'Session' object is not callable
+2025-02-06 22:41:46,032 - root - INFO - Завершение работы бота...
+2025-02-06 22:53:46,177 - root - INFO - Бот успешно запущен!
+2025-02-06 22:53:47,726 - root - ERROR - Критическая ошибка при запуске бота: cannot import name 'get_user_context' from 'app.shared' (C:\Users\Глеб\Desktop\kas\app\shared.py)
+2025-02-06 22:53:48,206 - root - INFO - Завершение работы бота...
+2025-02-06 23:25:26,326 - root - INFO - Бот успешно запущен!
+2025-02-06 23:25:27,747 - root - ERROR - Критическая ошибка при запуске бота: cannot import name 'get_user_context' from 'app.shared' (C:\Users\Глеб\Desktop\kas\app\shared.py)
+2025-02-06 23:25:28,120 - root - INFO - Завершение работы бота...
+2025-02-06 23:36:01,947 - root - INFO - Бот успешно запущен!
+2025-02-06 23:36:03,172 - root - ERROR - Критическая ошибка при запуске бота: cannot import name 'db_session' from 'app.shared' (C:\Users\Глеб\Desktop\kas\app\shared.py)
+2025-02-06 23:36:03,548 - root - INFO - Завершение работы бота...
+2025-02-06 23:53:28,290 - root - INFO - Бот успешно запущен!
+2025-02-06 23:53:29,789 - root - ERROR - Критическая ошибка при запуске бота: cannot import name 'db_session' from 'app.database' (C:\Users\Глеб\Desktop\kas\app\database.py)
+2025-02-06 23:53:30,307 - root - INFO - Завершение работы бота...
+2025-02-06 23:54:56,387 - root - INFO - Бот успешно запущен!
+2025-02-06 23:54:57,621 - root - ERROR - Критическая ошибка при запуске бота: cannot import name 'db_session' from 'app.database' (C:\Users\Глеб\Desktop\kas\app\database.py)
+2025-02-06 23:54:57,933 - root - INFO - Завершение работы бота...
+2025-02-07 00:15:07,614 - root - INFO - Бот успешно запущен!
+2025-02-07 00:15:08,919 - root - ERROR - Критическая ошибка при запуске бота: name 'UserContext' is not defined
+2025-02-07 00:15:09,254 - root - INFO - Завершение работы бота...
+2025-02-10 10:27:24,122 - root - INFO - Бот успешно запущен!
+2025-02-10 10:27:26,051 - root - ERROR - Критическая ошибка при запуске бота: name 'UserContext' is not defined
+2025-02-10 10:27:26,758 - root - INFO - Завершение работы бота...
