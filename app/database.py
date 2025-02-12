@@ -1,21 +1,28 @@
 # app/database.py
 
+import os
+import sys
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 from cryptography.fernet import Fernet
-from config.config import DATABASE_URL  # Импортируем URL базы данных
 from datetime import datetime
 
-# Создание базового класса для моделей
+# Добавляем корневую директорию проекта в sys.path
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, PROJECT_ROOT)
+
+# Импортируем конфигурацию
+from config.config import DATABASE_URL  # Импортируем URL базы данных
+
+# Создание базового класса для моделей (используем declarative_base из sqlalchemy.orm)
 Base = declarative_base()
 
 # Модель пользователя
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)  # Telegram ID
-    api_key_encrypted = Column(String)      # Зашифрованный API-ключ (хранится как строка)
-    api_secret_encrypted = Column(String)   # Зашифрованный API-секрет (хранится как строка)
+    api_key_encrypted = Column(String)      # Зашифрованный API-ключ
+    api_secret_encrypted = Column(String)   # Зашифрованный API-секрет
     profit_percentage = Column(Float, default=0.3)  # Процент прибыли
     fall_percentage = Column(Float, default=1.0)    # Процент падения
     delay_seconds = Column(Integer, default=30)     # Задержка между ордерами
@@ -49,24 +56,14 @@ class EncryptionManager:
         self.cipher_suite = Fernet(key)
     
     def encrypt(self, data: str) -> str:
-        """
-        Шифрует данные и возвращает их в виде строки (base64).
-        :param data: Строка для шифрования.
-        :return: Зашифрованные данные в формате строки.
-        """
         if not isinstance(data, str):
             raise ValueError("Данные для шифрования должны быть строкой.")
-        return self.cipher_suite.encrypt(data.encode()).decode()  # Возвращаем строку
+        return self.cipher_suite.encrypt(data.encode()).decode()
     
     def decrypt(self, encrypted_data: str) -> str:
-        """
-        Дешифрует данные из строки (base64) обратно в строку.
-        :param encrypted_data: Зашифрованные данные в формате строки.
-        :return: Расшифрованная строка.
-        """
         if not isinstance(encrypted_data, str):
             raise ValueError("Зашифрованные данные должны быть строкой.")
-        return self.cipher_suite.decrypt(encrypted_data.encode()).decode()  # Преобразуем строку в байты перед дешифрованием
+        return self.cipher_suite.decrypt(encrypted_data.encode()).decode()
 
 # Чтение ключа шифрования из файла
 with open("encryption_key.txt", "rb") as key_file:

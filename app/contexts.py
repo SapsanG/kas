@@ -3,6 +3,7 @@
 import ccxt
 from datetime import datetime, timedelta
 from app.database import User, TradeHistory, db_session, encryption_manager  # Импортируем необходимые компоненты из database.py
+from config.logging_config import logger  # Добавляем импорт logger
 
 class BotParams:
     def __init__(self, profit_percentage=0.3, fall_percentage=1.0, delay_seconds=30, order_size=40):
@@ -34,9 +35,11 @@ class UserContext:
             user = session.query(User).filter_by(id=self.user_id).first()
             if user:
                 if user.api_key_encrypted and user.api_secret_encrypted:
-                    # Дешифруем строки обратно в API-ключи
-                    self.api_key = encryption_manager.decrypt(user.api_key_encrypted)
-                    self.api_secret = encryption_manager.decrypt(user.api_secret_encrypted)
+                    try:
+                        self.api_key = encryption_manager.decrypt(user.api_key_encrypted)
+                        self.api_secret = encryption_manager.decrypt(user.api_secret_encrypted)
+                    except Exception as e:
+                        logger.error(f"Ошибка при дешифровании API-ключей для пользователя {self.user_id}: {e}")
                 return BotParams(
                     profit_percentage=user.profit_percentage,
                     fall_percentage=user.fall_percentage,
@@ -54,7 +57,6 @@ class UserContext:
                 session.add(user)
 
             if self.api_key and self.api_secret:
-                # Шифруем API-ключи как строки
                 user.api_key_encrypted = encryption_manager.encrypt(self.api_key)
                 user.api_secret_encrypted = encryption_manager.encrypt(self.api_secret)
 

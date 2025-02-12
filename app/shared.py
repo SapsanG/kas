@@ -1,6 +1,6 @@
 # app/shared.py
 
-from app.database import User, db_session, encryption_manager  # Импортируем необходимые компоненты из database.py
+from app.database import User, db_session  # Импортируем User и db_session
 from app.contexts import UserContext  # Импортируем UserContext
 
 # Класс для управления состоянием бота

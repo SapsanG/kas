@@ -3,7 +3,7 @@
 from telegram import Update
 from telegram.ext import CommandHandler, ContextTypes
 import logging
-from app.shared import get_user_context, bot_state_manager  # Импортируем необходимые компоненты
+from app.shared import get_user_context  # Импортируем get_user_context
 from config.logging_config import logger
 
 # Настройка логирования

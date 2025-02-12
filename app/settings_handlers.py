@@ -46,7 +46,7 @@ async def set_params(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         
         # Устанавливаем новые параметры
         user_context.bot_params.set_params(profit_percentage, fall_percentage, delay_seconds, order_size)
-        user_context.save_user_params()  # Сохраняем изменения в базу данных
+        user_context.save_user_params()  # Сохраняем изменения в базе данных
         
         if (
             old_params["profit_percentage"] == user_context.bot_params.profit_percentage and
@@ -91,14 +91,12 @@ async def set_api_keys(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     api_secret = context.args[1]
     
     try:
-        # Валидация API-ключей
-        validate_api_key(api_key)
-        validate_api_secret(api_secret)
-        
         # Получаем контекст пользователя
         user_context = get_user_context(user_id)
+        
+        # Устанавливаем API-ключи
         user_context.set_api_credentials(api_key, api_secret)
-        user_context.save_user_params()  # Сохраняем изменения в базу данных
+        user_context.save_user_params()  # Сохраняем изменения в базе данных
         
         await update.message.reply_text('API-ключи успешно установлены.')
     

@@ -1,0 +1,169 @@
+2025-02-11 17:48:27,503 - config.logging_config - INFO - База данных успешно инициализирована.
+2025-02-11 17:48:27,504 - config.logging_config - INFO - Бот успешно запущен!
+2025-02-11 17:48:33,032 - telegram.ext.Application - INFO - Application started
+2025-02-11 17:49:57,806 - config.logging_config - INFO - Команда /start вызвана пользователем 810668767
+2025-02-11 17:50:06,465 - config.logging_config - INFO - Команда /set_api_keys вызвана пользователем 810668767
+2025-02-11 17:50:08,890 - config.logging_config - INFO - Команда /check_api_keys вызвана пользователем 810668767
+2025-02-11 17:50:34,401 - config.logging_config - INFO - Команда /balance вызвана пользователем 810668767
+2025-02-11 17:50:34,413 - config.logging_config - ERROR - Ошибка при получении баланса для пользователя 810668767: API-ключи не установлены.
+2025-02-11 17:50:41,576 - config.logging_config - INFO - Команда /set_api_keys вызвана пользователем 810668767
+2025-02-11 17:50:48,227 - config.logging_config - INFO - Команда /check_api_keys вызвана пользователем 810668767
+2025-02-11 17:51:23,468 - telegram.ext.Application - INFO - Application is stopping. This might take a moment.
+2025-02-11 17:51:23,469 - telegram.ext.Application - INFO - Application.stop() complete
+2025-02-11 17:59:02,404 - config.logging_config - INFO - Проверяем таблицу users.
+2025-02-11 17:59:02,421 - config.logging_config - INFO - User ID: 810668767
+2025-02-11 17:59:02,424 - config.logging_config - INFO - API Key Encrypted: gAAAAABnq2PBfqmKqtWD9WHRBISoQ4Ba980PvhPCDTmz65tcKZlU4689t4mzemAuPURndvMqZvOMtXVps_2xaDE4cyj39ZntJrJXtJ3RD5H5LVbsAGLJalU=
+2025-02-11 17:59:02,428 - config.logging_config - INFO - API Secret Encrypted: gAAAAABnq2PBrCxrFcQSuZ0rfigmiEO95ZOj3ZItEXdP-TULphfUaHCC74BXuDYf4TYr39t1VCPQBZiPQNLIq46rGB2rlIxTenxbYTqM0FI866ezR77zhquyJC4ck8FaelTGjNuFBuBR
+2025-02-11 17:59:02,432 - config.logging_config - INFO - Profit Percentage: 0.3
+2025-02-11 17:59:02,435 - config.logging_config - INFO - Fall Percentage: 1.0
+2025-02-11 17:59:02,538 - config.logging_config - INFO - Delay Seconds: 30
+2025-02-11 17:59:02,554 - config.logging_config - INFO - Order Size: 40.0
+2025-02-11 18:18:02,412 - config.logging_config - INFO - База данных успешно инициализирована.
+2025-02-11 18:18:02,414 - config.logging_config - INFO - Бот успешно запущен!
+2025-02-11 18:18:07,747 - telegram.ext.Application - INFO - Application started
+2025-02-11 18:19:33,382 - config.logging_config - INFO - Команда /set_api_keys вызвана пользователем 810668767
+2025-02-11 18:19:50,196 - config.logging_config - INFO - Команда /check_api_keys вызвана пользователем 810668767
+2025-02-12 03:08:37,388 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.READ_NUM_BYTES, timeout=timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Storj2\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\telegram\request\_httpxrequest.py", line 293, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Storj2\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\telegram\ext\_updater.py", line 750, in _network_loop_retry
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\telegram\ext\_updater.py", line 744, in do_action
+    return action_cb_task.result()
+           ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\telegram\ext\_updater.py", line 371, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\telegram\ext\_extbot.py", line 650, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\telegram\_bot.py", line 4480, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\telegram\_bot.py", line 619, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\telegram\ext\_extbot.py", line 354, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\telegram\_bot.py", line 648, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\telegram\request\_baserequest.py", line 202, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\telegram\request\_baserequest.py", line 334, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Storj2\kas_bot\venv\Lib\site-packages\telegram\request\_httpxrequest.py", line 317, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ReadError: 

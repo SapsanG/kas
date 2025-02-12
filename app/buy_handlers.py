@@ -3,33 +3,15 @@
 from telegram import Update
 from telegram.ext import CommandHandler, ContextTypes
 import logging
-from app.contexts import UserContext  # Импортируем UserContext
-from app.shared import db_session  # Предполагается, что здесь есть логика работы с базой данных
+from app.shared import get_user_context  # Импортируем get_user_context
 from config.logging_config import logger
-import ccxt  # Импортируем ccxt
+import ccxt
 
 # Настройка логирования
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
-
-# Вспомогательная функция для получения контекста пользователя
-def get_user_context(user_id: int) -> UserContext:
-    """
-    Создает или возвращает существующий контекст пользователя.
-
-    :param user_id: Уникальный идентификатор пользователя.
-    :return: Экземпляр UserContext.
-    """
-    # Здесь можно добавить логику загрузки контекста пользователя из базы данных
-    # Если контекст не найден, создаем новый
-    user_context = db_session.query(UserContext).filter_by(user_id=user_id).first()
-    if not user_context:
-        user_context = UserContext(user_id=user_id)
-        db_session.add(user_context)
-        db_session.commit()  # Сохраняем новый контекст в базе данных
-    return user_context
 
 # Команда /balance
 async def balance(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -40,10 +22,8 @@ async def balance(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_context = get_user_context(user_id)
     
     try:
-        # Получаем экземпляр Mexc из контекста пользователя
-        mexc_instance = user_context.get_data("mexc_instance")
-        if not mexc_instance:
-            raise ValueError("API-ключи не установлены. Используйте /set_api_keys.")
+        # Получаем экземпляр MEXC для пользователя
+        mexc_instance = user_context.get_mexc_instance()
         
         # Получаем баланс
         balances = mexc_instance.fetch_balance()
@@ -85,10 +65,8 @@ async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     amount = float(context.args[1])
     
     try:
-        # Получаем экземпляр Mexc из контекста пользователя
-        mexc_instance = user_context.get_data("mexc_instance")
-        if not mexc_instance:
-            raise ValueError("API-ключи не установлены. Используйте /set_api_keys.")
+        # Получаем экземпляр MEXC для пользователя
+        mexc_instance = user_context.get_mexc_instance()
         
         # Выполняем покупку
         order = mexc_instance.create_market_buy_order(symbol, amount)
