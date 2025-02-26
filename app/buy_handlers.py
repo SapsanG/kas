@@ -1,4 +1,4 @@
-# app/buy_handlers.py
+# buy_handlers.py
 
 from telegram import Update
 from telegram.ext import CommandHandler, ContextTypes
@@ -58,20 +58,25 @@ async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_context = get_user_context(user_id)
     
     if len(context.args) != 2:
-        await update.message.reply_text('Использование: /buy <symbol> <amount>')
+        await update.message.reply_text('Использование: /buy <symbol> <cost>')
         return
     
     symbol = context.args[0].upper()
-    amount = float(context.args[1])
+    cost = float(context.args[1])  # Сумма в долларах
     
     try:
         # Получаем экземпляр MEXC для пользователя
         mexc_instance = user_context.get_mexc_instance()
         
-        # Выполняем покупку
-        order = mexc_instance.create_market_buy_order(symbol, amount)
+        # Выполняем покупку, используя cost (сумму в долларах)
+        order = mexc_instance.create_market_buy_order(symbol, cost)
+        
         logger.info(f"Выполнена покупка для пользователя {user_id}: {order}")
-        await update.message.reply_text(f'Заказ выполнен успешно: {order}')
+        await update.message.reply_text(
+            f'Заказ выполнен успешно:\n'
+            f'Символ: {symbol}\n'
+            f'Общая стоимость: ${cost:.2f}'
+        )
     
     except ccxt.InsufficientFunds as e:
         logger.error(f"Недостаточно средств для покупки для пользователя {user_id}: {e}")

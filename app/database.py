@@ -66,7 +66,7 @@ class EncryptionManager:
         return self.cipher_suite.decrypt(encrypted_data.encode()).decode()
 
 # Чтение ключа шифрования из файла
-with open("encryption_key.txt", "rb") as key_file:
+with open(r"C:\Users\Storj2\kas_bot\encryption_key.txt", "rb") as key_file:
     encryption_key = key_file.read()
 
 # Глобальный менеджер шифрования
