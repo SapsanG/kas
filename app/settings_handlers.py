@@ -3,7 +3,7 @@
 from telegram import Update
 from telegram.ext import CommandHandler, ContextTypes
 import logging
-from app.shared import get_user_context  # Импортируем get_user_context
+from app.shared import get_user_context, bot_state_manager  # Импортируем get_user_context
 from config.logging_config import logger
 
 # Настройка логирования
@@ -162,3 +162,21 @@ async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         f"Текущая цена покупки: ${user_context.bot_params.buy_price or 'Не определена'}\n"
     )
     await update.message.reply_text(reply)
+
+
+# Добавьте эту функцию в файл settings_handlers.py
+
+# Команда /reset_trading
+async def reset_trading(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    user_id = update.effective_user.id
+    logger.info(f"Команда /reset_trading вызвана пользователем {user_id}")
+
+    previous_state = bot_state_manager.is_trading_active(user_id)
+
+    if previous_state:
+        bot_state_manager.stop(user_id)
+        logger.info(f"Состояние автоторговли сброшено для пользователя {user_id}")
+        await update.message.reply_text("✅ Состояние автоторговли сброшено. Теперь вы можете запустить новую сессию.")
+    else:
+        logger.info(f"Автоторговля не была активна для пользователя {user_id}")
+        await update.message.reply_text("ℹ️ Автоторговля не запущена, сброс не требуется.")

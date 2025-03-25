@@ -11,6 +11,8 @@ logging.basicConfig(
     level=logging.INFO
 )
 
+
+
 # Команда /autobuy
 async def autobuy(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_id = update.effective_user.id
